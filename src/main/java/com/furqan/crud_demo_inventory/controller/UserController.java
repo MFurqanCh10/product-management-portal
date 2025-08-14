@@ -81,7 +81,7 @@ public class UserController {
 
         // Redirect to login with success message
         redirectAttributes.addFlashAttribute("successMessage", "A verification link has been sent to your email.");
-        return "redirect:/login";
+        return "redirect:/showMyLoginPage";
     }
 
     @Transactional
