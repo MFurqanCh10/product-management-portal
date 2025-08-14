@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -45,6 +46,7 @@ public class UserController {
             @ModelAttribute User user,
             @RequestParam("selectedRole") String selectedRole,
             HttpServletRequest request,
+            RedirectAttributes redirectAttributes,
             Model model
     ) {
 
@@ -53,7 +55,6 @@ public class UserController {
             model.addAttribute("errorMessage", "This email is already registered!");
             return "signup"; // stay on signup page
         }
-
 
         // Disable account until verification
         user.setEnabled(false);
@@ -78,7 +79,9 @@ public class UserController {
         String siteURL = request.getRequestURL().toString().replace(request.getServletPath(), "");
         emailService.sendVerificationEmail(user, siteURL);
 
-        return "redirect:/signup?success";
+        // Redirect to login with success message
+        redirectAttributes.addFlashAttribute("successMessage", "A verification link has been sent to your email.");
+        return "redirect:/login";
     }
 
     @Transactional
