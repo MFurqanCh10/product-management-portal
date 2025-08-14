@@ -132,11 +132,13 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
 
-    <p th:if="${param.success}" class="text-success mt-3 text-center">
-        A verification link has been sent to your email.
-    </p>
+        <!-- Login link -->
+        <div class="text-center mt-3">
+            <p>Already have an account? <a th:href="@{/login}" class="text-primary">Login here</a></p>
+        </div>
+
+    </form>
 </div>
 
 <script>

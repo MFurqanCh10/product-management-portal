@@ -71,12 +71,13 @@
             <div class="card">
                 <div class="card-header bg-primary text-white text-center">
                     <h4 class="mb-0">Login</h4>
+                </div>
+                <div class="card-body p-4">
 
+                    <!-- Flash message from signup -->
                     <div th:if="${successMessage}" class="alert alert-success text-center">
                         <span th:text="${successMessage}"></span>
                     </div>
-                </div>
-                <div class="card-body p-4">
 
                     <!-- Error message -->
                     <div th:if="${param.error}">
@@ -148,6 +149,20 @@
         setTimeout(function () {
             loader.style.display = "none";
         }, 10000);
+    });
+</script>
+
+<script>
+    // Auto-hide flash message after 5 seconds
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const flash = document.getElementById('flashMessage');
+        if (flash) {
+            setTimeout(() => {
+                flash.style.transition = "opacity 0.5s ease-out";
+                flash.style.opacity = '0';
+                setTimeout(() => flash.remove(), 500); // remove from DOM after fade
+            }, 5000); // 5 seconds
+        }
     });
 </script>
 
