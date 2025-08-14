@@ -9,89 +9,89 @@
 
     <title>Save Product</title>
 
+    <style>
+        /* Loader Styles */
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner {
+            border: 10px solid #f3f3f3;
+            border-top: 10px solid #3498db;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body>
 <!-- Loader -->
-<div id="loader" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(255,255,255,0.8); z-index:9999; justify-content:center; align-items:center;">
+<div id="loader">
     <div class="spinner"></div>
 </div>
 
-<!-- Spinner CSS -->
-<style>
-    .spinner {
-      border: 10px solid #f3f3f3;
-      border-top: 10px solid #3498db;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-</style>
-
-
 <div class="container">
-
     <h3>Product Directory</h3>
-
     <hr>
     <p class="h4 mb-4">Save Product</p>
-    <form action="#" th:action="@{/products/save}"
-          th:object="${product}" method="POST">
 
-        <!-- Add hidden from field to handle the update -->
+    <form action="#" th:action="@{/products/save}" th:object="${product}" method="POST">
+        <!-- Hidden field for update -->
+        <input type="hidden" th:field="*{id}">
 
-        <input tpye="hidden" th:field="*{id}">
-
-
-        <input type="text" th:field="*{item_Name}"
-               class="form-control mb-4 w-25" placeholder="Item Name">
-
-        <input type="text" th:field="*{sku_Number}"
-               class="form-control mb-4 w-25" placeholder="SKU_Number">
-
-        <input type="text" th:field="*{item_Vendor_Number}"
-               class="form-control mb-4 w-25" placeholder="Item_Vendor_Number">
-
-        <input type="text" th:field="*{image1}"
-               class="form-control mb-4 w-25" placeholder="Image1">
-
-        <input type="text" th:field="*{image2}"
-               class="form-control mb-4 w-25" placeholder="Image2">
+        <input type="text" th:field="*{item_Name}" class="form-control mb-4 w-25" placeholder="Item Name">
+        <input type="text" th:field="*{sku_Number}" class="form-control mb-4 w-25" placeholder="SKU_Number">
+        <input type="text" th:field="*{item_Vendor_Number}" class="form-control mb-4 w-25" placeholder="Item_Vendor_Number">
+        <input type="text" th:field="*{image1}" class="form-control mb-4 w-25" placeholder="Image1">
+        <input type="text" th:field="*{image2}" class="form-control mb-4 w-25" placeholder="Image2">
 
         <button type="submit" class="btn btn-info col2">Save</button>
-
-
-
     </form>
+
     <hr>
     <a th:href="@{/products/list}">Back to Product List</a>
 </div>
 
 <script>
-    // Show loader on form submit or link click
     document.addEventListener("DOMContentLoaded", function () {
-      const forms = document.querySelectorAll("form");
-      const links = document.querySelectorAll("a");
+        const loader = document.getElementById("loader");
+        const forms = document.querySelectorAll("form");
+        const links = document.querySelectorAll("a");
 
-      forms.forEach(form => {
-        form.addEventListener("submit", () => {
-          document.getElementById("loader").style.display = "flex";
-        });
-      });
+        function showLoader() {
+            loader.style.display = "flex";
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 10000);
+        }
 
-      links.forEach(link => {
-        link.addEventListener("click", (e) => {
-          const href = link.getAttribute("href");
-          if (href && !href.startsWith("#") && !href.startsWith("javascript:")) {
-            document.getElementById("loader").style.display = "flex";
-          }
+        forms.forEach(form => {
+            form.addEventListener("submit", showLoader);
         });
-      });
+
+        links.forEach(link => {
+            link.addEventListener("click", (e) => {
+                const href = link.getAttribute("href");
+                if (href && !href.startsWith("#") && !href.startsWith("javascript:")) {
+                    showLoader();
+                }
+            });
+        });
     });
 </script>
 

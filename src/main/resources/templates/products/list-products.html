@@ -144,7 +144,6 @@
                 <th>Image1</th>
                 <th>Image2</th>
                 <th sec:authorize="hasAnyRole('MANAGER','ADMIN')">Action</th>
-
             </tr>
             </thead>
 
@@ -167,20 +166,11 @@
                          height="50px"
                          onerror="this.onerror=null; this.src='/images/Default.jpeg';" />
                 </td>
-
-                     <!-- Action column visible to manager and admin only -->
-
                 <td sec:authorize="hasAnyRole('MANAGER','ADMIN')">
-
-                    <!-- update button for manager and admin only -->
-                <div class="d-flex gap-1">
+                    <div class="d-flex gap-1">
                         <a sec:authorize="hasAnyRole('ADMIN', 'MANAGER')"
                            th:href="@{/products/showFormForUpdate(productId=${product.id})}"
                            class="btn btn-info btn-sm">Update</a>
-
-
-                    <!-- delete button for admin only -->
-
                         <a sec:authorize="hasRole('ADMIN')"
                            th:href="@{/products/delete(productId=${product.id})}"
                            class="btn btn-danger btn-sm"
@@ -194,7 +184,6 @@
 </div>
 
 <script>
-    // Show loader on form submit or link click
     document.addEventListener("DOMContentLoaded", function () {
         const forms = document.querySelectorAll("form");
         const links = document.querySelectorAll("a");
@@ -202,14 +191,20 @@
         forms.forEach(form => {
             form.addEventListener("submit", () => {
                 document.getElementById("loader").style.display = "flex";
+                setTimeout(() => {
+                    document.getElementById("loader").style.display = "none";
+                }, 10000); // Hide after 10s max
             });
         });
 
         links.forEach(link => {
-            link.addEventListener("click", (e) => {
+            link.addEventListener("click", () => {
                 const href = link.getAttribute("href");
                 if (href && !href.startsWith("#") && !href.startsWith("javascript:")) {
                     document.getElementById("loader").style.display = "flex";
+                    setTimeout(() => {
+                        document.getElementById("loader").style.display = "none";
+                    }, 10000); // Hide after 10s max
                 }
             });
         });
@@ -217,7 +212,6 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
 
 </body>
 </html>
