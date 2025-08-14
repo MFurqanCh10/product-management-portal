@@ -75,7 +75,7 @@
                 <div class="card-body p-4">
 
                     <!-- Flash message from signup -->
-                    <div th:if="${successMessage}" class="alert alert-success text-center">
+                    <div id="flashMessage" th:if="${successMessage}" class="alert alert-success text-center">
                         <span th:text="${successMessage}"></span>
                     </div>
 
