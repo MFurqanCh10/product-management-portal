@@ -24,6 +24,10 @@
             border-radius: 15px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
+        .card-header {
+            border-top-left-radius: 15px !important; /* Force match */
+            border-top-right-radius: 15px !important; /* Force match */
+        }
         .card-header h4 {
             font-size: clamp(1.25rem, 4vw, 1.5rem);
         }
@@ -117,7 +121,7 @@
                         <!-- Sign Up Link -->
                         <div class="text-center">
                             <p class="mb-2">Don't have an account?</p>
-                            <a th:href="@{/signup}" class="btn btn-outline-light btn-sm">Sign Up</a>
+                            <a th:href="@{/signup}" class="btn btn-primary btn-sm">Sign Up</a>
                         </div>
 
                     </form>
@@ -160,8 +164,8 @@
             setTimeout(() => {
                 flash.style.transition = "opacity 0.5s ease-out";
                 flash.style.opacity = '0';
-                setTimeout(() => flash.remove(), 500); // remove from DOM after fade
-            }, 5000); // 5 seconds
+                setTimeout(() => flash.remove(), 1000); // remove from DOM after fade
+            }, 10000); // 10 seconds
         }
     });
 </script>
