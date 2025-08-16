@@ -347,7 +347,7 @@
                              onerror="this.onerror=null; this.src='/images/Default.jpeg';" />
                     </td>
                     <td th:text="${product.quantity}"></td>
-                    <td th:text="${product.sale_Price} + ' ' + ${currencyUnit}"></td>
+                    <td th:text="${product.sale_Price} + ' ' + currencyUnit"></td>
 
                     <td>
                         <span th:text="${product.active} ? 'Active' : 'Inactive'"></span>
