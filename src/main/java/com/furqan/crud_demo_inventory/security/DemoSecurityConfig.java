@@ -55,7 +55,7 @@ public class DemoSecurityConfig {
                                 .requestMatchers("/manager-role").hasAnyRole("MANAGER", "ADMIN")
                                 .requestMatchers("/employ-role").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
 
-                                .requestMatchers("/signup", "/verify", "/css/**", "/js/**").permitAll()
+                                .requestMatchers("/signup", "/forgot-password", "/reset-password/**","/verify", "/css/**", "/js/**").permitAll()
 
                                 .anyRequest().authenticated()
                 )
