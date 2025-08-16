@@ -96,7 +96,11 @@
         <input type="text" th:field="*{image2}" class="form-control mb-3" placeholder="Image 2 URL">
         <input type="number" th:field="*{quantity}" placeholder="Quantity"/>
         <input type="number" th:field="*{sale_Price}" placeholder="Sale Price"/>
-        <input type="checkbox" th:field="*{active}"/> Active
+        <select th:field="*{active}" class="form-control mb-3">
+            <option th:value="true">Active</option>
+            <option th:value="false">Inactive</option>
+        </select>
+
 
         <div class="d-grid">
             <button type="submit" class="btn btn-info btn-lg">Save</button>

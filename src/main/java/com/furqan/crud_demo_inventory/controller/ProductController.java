@@ -3,7 +3,7 @@ package com.furqan.crud_demo_inventory.controller;
 import com.furqan.crud_demo_inventory.entity.Product;
 import com.furqan.crud_demo_inventory.repository.ProductRepository;
 import com.furqan.crud_demo_inventory.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.furqan.crud_demo_inventory.service.ConfigurationService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +20,17 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final ProductService productService;
+    private final ConfigurationService configurationService;
 
-    private ProductService productService;
-
-    public ProductController(ProductService theProductService){
-        productService = theProductService;
+    // ✅ Constructor injection only
+    public ProductController(ProductRepository productRepository,
+                             ProductService productService,
+                             ConfigurationService configurationService) {
+        this.productRepository = productRepository;
+        this.productService = productService;
+        this.configurationService = configurationService;
     }
 
     @PreAuthorize("hasAnyRole('EMPLOYEE', 'MANAGER', 'ADMIN')")
@@ -38,9 +42,11 @@ public class ProductController {
 
         if (keyword != null && !keyword.trim().isEmpty()) {
             // 🔒 Search only allowed for ADMIN
-            if (!org.springframework.security.core.context.SecurityContextHolder.getContext()
+            boolean isAdmin = org.springframework.security.core.context.SecurityContextHolder.getContext()
                     .getAuthentication().getAuthorities()
-                    .stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+                    .stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+            if (!isAdmin) {
                 theModel.addAttribute("error", "Access Denied: Only Admin can search.");
                 theProducts = productService.findAll(); // fallback
             } else {
@@ -50,6 +56,10 @@ public class ProductController {
             theProducts = productService.findAll();
         }
 
+        // ✅ Add Currency Unit
+        String currencyUnit = configurationService.getCurrencyUnit();
+        theModel.addAttribute("currencyUnit", currencyUnit);
+
         theModel.addAttribute("products", theProducts);
         theModel.addAttribute("keyword", keyword);
 
@@ -58,30 +68,40 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel){
+    public String showFormForAdd(Model theModel) {
         Product theProduct = new Product();
         theModel.addAttribute("product", theProduct);
+
+        // ✅ Currency for form
+        String currencyUnit = configurationService.getCurrencyUnit();
+        theModel.addAttribute("currencyUnit", currencyUnit);
+
         return "products/products-form";
     }
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("productId") int theId, Model theModel){
+    public String showFormForUpdate(@RequestParam("productId") int theId, Model theModel) {
         Product theProduct = productService.findById(theId);
         theModel.addAttribute("product", theProduct);
+
+        // ✅ Currency for update form
+        String currencyUnit = configurationService.getCurrencyUnit();
+        theModel.addAttribute("currencyUnit", currencyUnit);
+
         return "products/products-form";
     }
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @PostMapping("/save")
-    public String saveProducts(@ModelAttribute("product") Product theProduct){
+    public String saveProducts(@ModelAttribute("product") Product theProduct) {
         productService.save(theProduct);
         return "redirect:/products/list";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete")
-    public String delete(@RequestParam("productId") int theId){
+    public String delete(@RequestParam("productId") int theId) {
         productService.deleteById(theId);
         return "redirect:/products/list";
     }
@@ -110,7 +130,7 @@ public class ProductController {
                 }
 
                 String[] values = line.split(",");
-                if (values.length < 5) continue;
+                if (values.length < 8) continue; // ✅ Fix: minimum 8 fields required
 
                 Product product = new Product();
                 product.setItem_Name(values[0].trim());
@@ -118,9 +138,10 @@ public class ProductController {
                 product.setItem_Vendor_Number(values[2].trim());
                 product.setImage1(values[3].trim());
                 product.setImage2(values[4].trim());
-
                 product.setQuantity(Integer.parseInt(values[5].trim()));
                 product.setSale_Price(Double.parseDouble(values[6].trim()));
+
+                // ✅ If you want to keep boolean Active/Inactive
                 product.setActive(Boolean.parseBoolean(values[7].trim()));
 
                 productList.add(product);
