@@ -13,10 +13,6 @@ public class ConfigurationService {
 
     public String getCurrencyUnit() {
         Configuration config = configurationRepository.findByParameterName("Currency Unit");
-        if (config != null) {
-            return config.getParameterValue();
-        } else {
-            return "USD";
-        }
+        return config != null ? config.getParameterValue() : null;
     }
 }
