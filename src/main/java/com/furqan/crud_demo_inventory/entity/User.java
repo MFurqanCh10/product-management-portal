@@ -33,6 +33,9 @@ public class User {
     @Transient
     private String selectedRole;
 
+    @Column(name = "reset_token")
+    private String resetToken;
+
 
 
     // Getters and Setters
@@ -126,5 +129,13 @@ public class User {
 
     public void setSelectedRole(String selectedRole) {
         this.selectedRole = selectedRole;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
     }
 }
