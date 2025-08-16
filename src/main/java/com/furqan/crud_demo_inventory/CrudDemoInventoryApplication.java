@@ -70,10 +70,10 @@ public class CrudDemoInventoryApplication {
 	}
 
 	private void queryForProductsByItem_Vendor_Number(ProductDao productDao) {
-		//get a list of students
+		//get a list of products
 		List<Product> theProducts = productDao.findByItem_Vendor_Number("4067500");
 
-		//display list of students
+		//display list of products
 		for (Product tempProduct : theProducts){
 			System.out.println(tempProduct);
 		}

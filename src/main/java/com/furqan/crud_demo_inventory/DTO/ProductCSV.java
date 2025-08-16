@@ -18,6 +18,15 @@ public class ProductCSV {
     @CsvBindByName(column = "image2")
     private String Image2;
 
+    @CsvBindByName(column = "quantity")
+    private Integer quantity;
+
+    @CsvBindByName(column = "sale_price")
+    private double sale_Price;
+
+    @CsvBindByName(column = "active")
+    private  boolean active;
+
     // Getters and Setters
     public String getItem_Name() {
         return Item_Name;
@@ -57,5 +66,29 @@ public class ProductCSV {
 
     public void setImage2(String image2) {
         Image2 = image2;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getSale_Price() {
+        return sale_Price;
+    }
+
+    public void setSale_Price(double sale_Price) {
+        this.sale_Price = sale_Price;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

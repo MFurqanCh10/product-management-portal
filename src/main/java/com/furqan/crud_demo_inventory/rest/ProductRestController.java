@@ -41,7 +41,7 @@ public class ProductRestController {
 
     }
     // expose "/products" and return a list of product
-    @GetMapping("/productss")
+    @GetMapping("/products")
     public List<Product> findAll(){
         return productService.findAll();
     }
@@ -168,6 +168,12 @@ public class ProductRestController {
         product.setItem_Vendor_Number(csv.getItem_Vendor_Number());
         product.setImage1(csv.getImage1());
         product.setImage2(csv.getImage2());
+
+        // ✅ New fields
+        product.setQuantity(csv.getQuantity());        // Integer
+        product.setSale_Price(csv.getSale_Price());      // Double
+        product.setActive(csv.isActive());
+
         return product;
     }
 

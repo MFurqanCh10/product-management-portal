@@ -119,6 +119,10 @@ public class ProductController {
                 product.setImage1(values[3].trim());
                 product.setImage2(values[4].trim());
 
+                product.setQuantity(Integer.parseInt(values[5].trim()));
+                product.setSale_Price(Double.parseDouble(values[6].trim()));
+                product.setActive(Boolean.parseBoolean(values[7].trim()));
+
                 productList.add(product);
             }
 

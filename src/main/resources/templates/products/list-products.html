@@ -17,7 +17,7 @@
         #sidebar {
             width: 0;
             overflow-x: hidden;
-            transition: width 0s;
+            transition: width 0.3s;
             background-color: #f8f9fa;
             border-right: 1px solid #ddd;
             padding-top: 20px;
@@ -291,7 +291,8 @@
         </div>
 
         <!-- Sidebar Toggle Button -->
-        <button class="btn btn-primary btn-tiny mb-3" onclick="toggleMenu()">Menu</button>
+        <div class="d-flex justify-content-left side">
+            <button class="btn btn-primary btn-tiny mb-3" onclick="toggleMenu()">Menu</button> </div>
 
         <h3>Product Directory</h3>
         <hr>
@@ -326,6 +327,9 @@
                     <th>Item-Vendor-Number</th>
                     <th>Image1</th>
                     <th>Image2</th>
+                    <th>Quantity</th>
+                    <th>Sale_Price</th>
+                    <th>Active</th>
                     <th sec:authorize="hasAnyRole('MANAGER','ADMIN')">Action</th>
                 </tr>
                 </thead>
@@ -342,6 +346,9 @@
                         <img th:src="${product.image2}" alt="Image2" width="50px" height="50px"
                              onerror="this.onerror=null; this.src='/images/Default.jpeg';" />
                     </td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.sale_Price}"></td>
+                    <td th:text="${product.active}"></td>
                     <td sec:authorize="hasAnyRole('MANAGER','ADMIN')">
                         <div class="d-flex gap-1 flex-wrap">
                             <a sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" th:href="@{/products/showFormForUpdate(productId=${product.id})}" class="btn btn-info btn-sm">Update</a>

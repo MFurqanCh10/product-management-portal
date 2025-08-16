@@ -26,6 +26,15 @@ public class Product {
     @Column(name="image2")
     private String Image2;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "sale_Price")
+    private double sale_Price;
+
+    @Column(name = "active")
+    private boolean active;
+
     // constructors
 
     public Product(){
@@ -37,6 +46,12 @@ public class Product {
         Item_Vendor_Number = item_Vendor_Number;
         Image1 = image1;
         Image2 = image2;
+    }
+
+    public Product(Integer quantity, double sale_Price, boolean active) {
+        this.quantity = quantity;
+        this.sale_Price = sale_Price;
+        this.active = active;
     }
 
     public int getId() {
@@ -87,6 +102,30 @@ public class Product {
         Image2 = image2;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getSale_Price() {
+        return sale_Price;
+    }
+
+    public void setSale_Price(double sale_Price) {
+        this.sale_Price = sale_Price;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -96,6 +135,9 @@ public class Product {
                 ", Item_Vendor_Number='" + Item_Vendor_Number + '\'' +
                 ", Image1='" + Image1 + '\'' +
                 ", Image2='" + Image2 + '\'' +
+                ", quantity=" + quantity +
+                ", sale_Price=" + sale_Price +
+                ", active=" + active +
                 '}';
     }
 }
