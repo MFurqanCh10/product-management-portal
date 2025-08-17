@@ -13,7 +13,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    // Existing method for verification
+    // ✅ Method for verification email
     public void sendVerificationEmail(User user, String siteURL) {
         String subject = "Verify your registration";
         String senderName = "Product Management Portal";
@@ -27,7 +27,7 @@ public class EmailService {
         sendHtmlEmail(user.getEmail(), subject, content, senderName);
     }
 
-    // ✅ New method for forgot password
+    // ✅ Method for forgot password
     public void sendPasswordResetEmail(User user, String siteURL) {
         String subject = "Password Reset Request";
         String senderName = "Product Management Portal";
@@ -43,16 +43,17 @@ public class EmailService {
         sendHtmlEmail(user.getEmail(), subject, content, senderName);
     }
 
-    // ✅ Common private method to avoid repeating code
+    // ✅ Common private method
     private void sendHtmlEmail(String to, String subject, String content, String senderName) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message);
+            // true = HTML support + attachments possible
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            helper.setFrom("itxmfurqan@gmail.com");
+            helper.setFrom("itxmfurqan@gmail.com", "PRODUCT MANAGEMENT PORTAL");
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(content, true);
+            helper.setText(content, true); // HTML content
 
             mailSender.send(message);
         } catch (Exception e) {
