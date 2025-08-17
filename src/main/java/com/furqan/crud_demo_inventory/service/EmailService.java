@@ -49,7 +49,7 @@ public class EmailService {
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message);
 
-            helper.setFrom("itxmfurqan@gmail.com", "MUHAMMAD FURQAN");
+            helper.setFrom("itxmfurqan@gmail.com");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content, true);
