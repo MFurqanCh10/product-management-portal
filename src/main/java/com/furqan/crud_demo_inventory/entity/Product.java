@@ -1,8 +1,6 @@
 package com.furqan.crud_demo_inventory.entity;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
-
 @Entity
 @Table(name="product")
 public class Product {
@@ -18,7 +16,7 @@ public class Product {
     @Column(name = "Sku_Number")
     private String Sku_Number;
 
-    @NotNull
+
     @Column(name="Item_Vendor_Number", nullable = false)
     private Integer Item_Vendor_Number;
 
