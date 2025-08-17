@@ -90,12 +90,15 @@
         <input type="hidden" th:field="*{id}">
 
         <input type="text" th:field="*{item_Name}" class="form-control mb-3" placeholder="Item Name">
-        <input type="text" th:field="*{sku_Number}" class="form-control mb-3" placeholder="SKU Number">
-        <input type="number" th:field="*{itemVendorNumber}" class="form-control mb-3" placeholder="Item Vendor Number" required>
+        <input type="text" th:field="*{sku_Number}" class="form-control mb-3" placeholder="SKU #">
+        <input type="number" th:field="*{itemVendorNumber}" class="form-control mb-3" placeholder="Vendor #" required>
         <input type="text" th:field="*{image1}" class="form-control mb-3" placeholder="Image 1 URL">
         <input type="text" th:field="*{image2}" class="form-control mb-3" placeholder="Image 2 URL">
-        <input type="number" th:field="*{quantity}" placeholder="Quantity"/>
-        <input type="number" th:field="*{sale_Price}" placeholder="Sale Price"/>
+        <input type="number" th:field="*{quantity}" class="form-control mb-3" placeholder="Quantity">
+        <div class="input-group mb-3">
+            <span class="input-group-text" th:text="${currencyUnit}"></span>
+            <input type="number" th:field="*{sale_Price}" class="form-control" placeholder="Sale Price">
+        </div>
         <select th:field="*{active}" class="form-control mb-3">
             <option th:value="true">Active</option>
             <option th:value="false">Inactive</option>
