@@ -10,7 +10,7 @@ public class ProductCSV {
     private String Sku_Number;
 
     @CsvBindByName(column = "Item_Vendor_Number")
-    private String Item_Vendor_Number;
+    private Integer Item_Vendor_Number;
 
     @CsvBindByName(column = "image1")
     private String Image1;
@@ -44,11 +44,11 @@ public class ProductCSV {
         Sku_Number = sku_Number;
     }
 
-    public String getItem_Vendor_Number() {
+    public Integer getItem_Vendor_Number() {
         return Item_Vendor_Number;
     }
 
-    public void setItem_Vendor_Number(String item_Vendor_Number) {
+    public void setItem_Vendor_Number(Integer item_Vendor_Number) {
         Item_Vendor_Number = item_Vendor_Number;
     }
 

@@ -13,7 +13,14 @@ public class ConfigurationService {
 
     public String getCurrencyUnit() {
         Configuration config = configurationRepository.findByParameterNameIgnoreCase("Currency Unit");
-        return config != null ? config.getParameterValue() : "";
+        if (config != null) {
+            String value = config.getParameterValue();
+            // Map PKR → Rs.
+            if ("PKR".equalsIgnoreCase(value)) {
+                return "Rs.";
+            }
+            return value; // fallback if other currency
+        }
+        return "";
     }
-
 }

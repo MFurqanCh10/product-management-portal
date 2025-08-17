@@ -1,6 +1,7 @@
 package com.furqan.crud_demo_inventory.entity;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name="product")
@@ -17,8 +18,9 @@ public class Product {
     @Column(name = "Sku_Number")
     private String Sku_Number;
 
-    @Column(name="Item_Vendor_Number")
-    private String Item_Vendor_Number;
+    @NotNull
+    @Column(name="Item_Vendor_Number", nullable = false)
+    private Integer Item_Vendor_Number;
 
     @Column(name="image1")
     private String Image1;
@@ -40,7 +42,7 @@ public class Product {
     public Product(){
     }
 
-    public Product(String item_Name, String sku_Number, String item_Vendor_Number, String image1, String image2) {
+    public Product(String item_Name, String sku_Number, Integer item_Vendor_Number, String image1, String image2) {
         Item_Name = item_Name;
         Sku_Number = sku_Number;
         Item_Vendor_Number = item_Vendor_Number;
@@ -78,11 +80,11 @@ public class Product {
         Sku_Number = sku_Number;
     }
 
-    public String getItem_Vendor_Number() {
+    public Integer getItem_Vendor_Number() {
         return Item_Vendor_Number;
     }
 
-    public void setItem_Vendor_Number(String item_Vendor_Number) {
+    public void setItem_Vendor_Number(Integer item_Vendor_Number) {
         Item_Vendor_Number = item_Vendor_Number;
     }
 

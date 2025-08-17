@@ -116,19 +116,21 @@
                 font-size: 0.75rem;
             }
         }
-         <!-- Optional: CSS to rotate arrows -->
-        <style>
-            .btn[aria-expanded="true"] .arrow {
-                transform: rotate(90deg);
-                transition: transform 0.2s ease;
-            }
-            .arrow {
-                transition: transform 0.2s ease;
-            }
-        .btn-tiny {
-    padding: 2px 6px;
-    font-size: 12px;
-}
+
+    /* Optional: CSS to rotate arrows */
+    .btn[aria-expanded="true"] .arrow {
+        transform: rotate(90deg);
+        transition: transform 0.2s ease;
+    }
+    .arrow {
+        transition: transform 0.2s ease;
+    }
+    .btn-tiny {
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+    </style>
+
 
     </style>
 
@@ -322,9 +324,9 @@
             <table class="table table-bordered table-striped mb-0">
                 <thead class="table-dark">
                 <tr>
-                    <th>Item_Name</th>
-                    <th>SKU-Number</th>
-                    <th>Item-Vendor-Number</th>
+                    <th>Item Name</th>
+                    <th>SKU #</th>
+                    <th>Vendor #</th>
                     <th>Image1</th>
                     <th>Image2</th>
                     <th>Quantity</th>
@@ -346,8 +348,11 @@
                         <img th:src="${product.image2}" alt="Image2" width="50px" height="50px"
                              onerror="this.onerror=null; this.src='/images/Default.jpeg';" />
                     </td>
+
                     <td th:text="${product.quantity}"></td>
-                    <td th:text="|${product.sale_Price} ${currencyUnit}|"></td>
+
+                    <td th:text="${currencyUnit} + ' ' + ${product.sale_Price}"></td>
+
 
                     <td>
                         <span th:text="${product.active} ? 'Active' : 'Inactive'"></span>

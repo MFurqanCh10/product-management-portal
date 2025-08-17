@@ -135,7 +135,7 @@ public class ProductController {
                 Product product = new Product();
                 product.setItem_Name(values[0].trim());
                 product.setSku_Number(values[1].trim());
-                product.setItem_Vendor_Number(values[2].trim());
+                product.setItem_Vendor_Number(Integer.valueOf(values[2].trim()));
                 product.setImage1(values[3].trim());
                 product.setImage2(values[4].trim());
                 product.setQuantity(Integer.parseInt(values[5].trim()));

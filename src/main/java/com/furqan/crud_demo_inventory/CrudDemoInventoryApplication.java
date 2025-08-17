@@ -89,7 +89,7 @@ public class CrudDemoInventoryApplication {
 		}
 	}
 
-	private void readProduct(ProductDao productDao) {
+	/*private void readProduct(ProductDao productDao) {
 
 		//create product object
 		System.out.println("Creating a new product:");
@@ -110,9 +110,9 @@ public class CrudDemoInventoryApplication {
 
 		//display products
 		System.out.println("found the product: " + myProduct);
-	}
+	}*/
 
-	private void createMultipleProducts(ProductDao productDao) {
+	/*private void createMultipleProducts(ProductDao productDao) {
 // create multiple students
 
 		System.out.println("Creating new Product object:");
@@ -135,9 +135,9 @@ public class CrudDemoInventoryApplication {
 		productDao.save(tempProduct1);
 		productDao.save(tempProduct2);
 		productDao.save(tempProduct3);
-	}
+	}*/
 
-	private void createProduct(ProductDao productDao) {
+	/*private void createProduct(ProductDao productDao) {
 
 		// create the product object
 		System.out.println("Creating new Product object:");
@@ -155,7 +155,7 @@ public class CrudDemoInventoryApplication {
 		System.out.println("saved product. Generated id: " + tempProduct.getId());
 
 
-	}
+	}*/
 }
 
 
