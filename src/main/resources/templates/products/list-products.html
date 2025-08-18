@@ -327,8 +327,7 @@
                     <th>Item Name</th>
                     <th>SKU #</th>
                     <th>Vendor #</th>
-                    <th>Image1</th>
-                    <th>Image2</th>
+                    <th>Image</th>
                     <th>Quantity</th>
                     <th>Sale Price</th>
                     <th>Status</th>
@@ -341,11 +340,7 @@
                     <td th:text="${product.sku_Number}"></td>
                     <td th:text="${product.item_Vendor_Number}"></td>
                     <td>
-                        <img th:src="${product.image1}" alt="Image1" width="50px" height="50px"
-                             onerror="this.onerror=null; this.src='/images/Default.jpeg';" />
-                    </td>
-                    <td>
-                        <img th:src="${product.image2}" alt="Image2" width="50px" height="50px"
+                        <img th:src="${product.image1}" alt="Image" width="50px" height="50px"
                              onerror="this.onerror=null; this.src='/images/Default.jpeg';" />
                     </td>
 
